@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Favicon-->
+    <link rel="icon" href="images/calculate.png">
+
+    <!--FONTS-->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Calcolatrice-LOMBARDI</title>
+</head>
+<body>
+
+    <!--CODICE PRINCIPALE IN STRUTTURA HTML DELLA CALCOLATRICE-->
+    <div id="titolo">Calcolatrice v 1.0</div>
+
+    <div class="calcolatrice">
+        <div id="insert_1">
+            <input type="text" class="numero" placeholder="Inserisci il primo numero" id="numero_1">
+        </div>
+
+        <div id="insert_2">
+            <input type="text" class="numero" placeholder="Inserisci il secondo numero" id="numero_2">
+        </div>
+
+        <div class="bottone">
+            <button type="button" class="bottoni" onclick="setOperazione('somma')">&plus;</button>
+            <button type="button" class="bottoni" onclick="setOperazione('sottrazione')">&minus;</button>
+            <button type="button" class="bottoni" onclick="setOperazione('divisione')">&divide;</button>
+            <button type="button" class="bottoni" onclick="setOperazione('moltiplicazione')">&times;</button>
+            <button type="button" class="bottoni" id="equal" onclick="calcola()">&equals;</button>
+        </div>
+
+        <div class="risultato">
+            <div id="testo">Risultato Finale:</div>
+            <input type="text" class="numero" readonly id="final">
+        </div>
+    </div>
+
+    <!--MODIFICA DELLO STILE IN CSS INTEGRATO NEL DOCUMENTO HTML-->
+    <style>
+        /*fonts import*/
+            @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+        /*set di base*/
+            body{
+                margin: auto;
+                font-family: Raleway, Arial, Helvetica, sans-serif;
+                font-size: 11pt;
+                background-color: #b7e4c7;
+            }
+
+        /*set del titolo*/
+            #titolo{
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 2rem;
+                text-align: center;
+                font-size: 20pt;
+                font-weight: bold;
+                margin-bottom: 2rem;
+            }
+
+        /*set contorno calcolatrice*/
+            .calcolatrice{
+                width: 30%;
+                height: 30vh;
+                background-color: #74c69d;
+                margin-left: auto;
+                margin-right: auto;
+                border-radius: 14px;
+            }
+
+        /*modifica campi inserimento*/
+            #insert_1, #insert_2{
+                position:relative;
+                top: 2rem;
+                left: 2rem;
+            }
+
+
+            .numero{
+                width: 87%;
+                padding: 0.5rem;
+                font-family: Raleway, Arial, Helvetica, sans-serif;
+                border: 1px solid #081c15;
+                border-radius: 4px;
+            }
+
+            #insert_2{
+                top: 3rem;
+            }
+
+            .bottone{
+                position: relative;
+                top: 4rem;
+                left: 5rem;
+                width: 90%;
+            }
+            .bottoni{
+                width: 16%;
+                padding: 0.4rem;
+                background-color: #b7e4c7;
+                color: #081c15;
+                border: 1px solid #081c15;
+                border-radius: 4px;
+            }
+            #equal{
+                background-color: #1b4332;
+                color: #b7e4c7;
+            }
+
+            .risultato{
+                position: relative;
+                top: 7rem;
+                left: 2rem;
+            }
+            .risultato #testo{
+                font-size: 9pt;
+            }
+
+        /*sottolineature*/
+            .numero:focus{
+                outline: 2px solid #081c15;
+                outline-offset: -0.9px;
+                transition: 50ms;
+            }
+            #final:focus{
+                outline: none;
+                cursor: default;
+            }
+            .bottoni:hover{
+                cursor: pointer;
+                background-color: #74c69d;
+            }
+
+
+            /*media queries*/
+            @media screen and (max-width: 1750px){
+                .numero{
+                    width: 85%;
+                }
+            }
+            @media screen and (max-width: 1650px){
+                .numero{
+                    width: 83%;
+                }
+                .bottone{
+                    left: 3.5rem;
+                }
+                #insert_1, #insert_2, .risultato{
+                    left: 1.5rem;
+                }
+                .bottone{
+                    left: 2.8rem;
+                }
+            }
+            @media screen and (max-width: 1320px){
+                #insert_1, #insert_2, .risultato{
+                    left: 1.5rem;
+                }
+                .bottone{
+                    left: 2.8rem;
+                }
+            }
+            @media screen and (max-width: 1320px){
+                #insert_1, #insert_2{
+                    left: 1.3rem;
+                }
+                .bottone{
+                    left: 2.3rem;
+                }
+            }
+
+    </style>
+
+    <!--CODICE DI SCRIPT-->
+    <script>
+        //Set variabile operazione
+        var operazione= '';
+
+        //Set operazione
+        function setOperazione (operation){
+            operazione= operation;
+        }
+
+        function calcola (){
+            //variabili numeri inseriti
+            var num1= parseFloat(document.getElementById('numero_1').value);
+            var num2= parseFloat(document.getElementById('numero_2').value);
+            
+            //allocazione variabile risultato (vuota)
+            var risultato;
+
+            //Controllo inserimenoto numero (altrimenti restituisci in output errore)
+            if (isNaN(num1) || isNaN(num2)){
+                risultato= "Errore. Inserisci solamente numeri e non caratteri. Riprova: ";
+            }else{
+                switch (operazione){
+                    case 'somma':
+                        risultato= num1+num2;
+                        break;
+                    
+                    case 'sottrazione':
+                        risultato= num1-num2;
+                        break;
+
+                    case 'moltiplicazione':
+                        risultato= num1*num2;
+                        break;
+
+                    case 'divisione':
+                        if (num2 != 0){
+                            risultato= num1/num2;
+                        }else{
+                            risultato="Math Error: Division by zero";
+                        }
+                        break;
+                }
+            }
+
+            document.getElementById('final').value=risultato;
+
+        }
+    </script>
+    
+</body>
+</html>
