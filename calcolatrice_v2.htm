@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--FAVICON-->
+    <link rel="icon" href="../images/calculate.png">
+
+    <!--FONT API-->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <title>Calcolatrice V 2.0- Lombardi</title>
+</head>
+<body>
+
+    <!--STRUTTURA HTML-->
+
+    <div class="titolo">CALCOLATRICE V 2.0</div>
+
+    <div class="contenitore_calcolatrice">
+        <div class="sezione_input">
+            <input type="text" placeholder="Inserisci un numero" id="inserimento_valori">
+        </div>
+
+        <div class="bottoni">
+            <div id="prima_riga">
+                <button type="button" id="standard" onclick="setOperazione('somma')">&plus;</button>
+                <button type="button" id="standard"  class="a "onclick="setOperazione('differenza')">&minus;</button>
+                <button type="button" id="standard" class="a "onclick="setOperazione('moltiplicazione')">&times;</button>
+                <button type="button" id="standard" class="a " onclick="setOperazione('divisione')">&divide;</button>
+                <button type="button" id="equal" class="a" onclick="calcolaRisultato()">&equals;</button>
+            </div>
+
+            <div id="funzioni">
+                <button type="button" id="fun" onclick="funzioni('percentuale')">&percnt;</button>
+                <button type="button" id="fun" class="b" onclick= "funzioni('radice')">&Sqrt;</button>
+                <button type="button" id="fun" class="b" onclick= "funzioni('potenza')">x<sup>2</sup></button>
+                <button type="button" id="fun" class="b" onclick= "funzioni('sin')">sin</button>
+                <button type="button" id="fun" class="b" onclick= "funzioni('cos')">cos</button>
+            </div>
+        </div>
+        <div class="risultato">
+            <input type="text" readonly placeholder="Risultato" id="final">
+        </div>
+    </div>
+
+    <!--CSS-->
+    <style>
+        /*import del font*/
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+        /*setting generale*/
+        body{
+            margin: auto;
+            font-family: "Open Sans", Arial, Helvetica, sans-serif;
+            font-size: 11pt;
+            background-color: #00296b;
+        }
+
+        /*titolo*/
+        .titolo{
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 19pt;
+            font-weight: bold;
+            color: rgb(255,255,255);
+        }
+
+        /*box calcolatrice*/
+        .contenitore_calcolatrice{
+            margin-left: auto;
+            margin-right: auto;
+            width: 25%;
+            height: 23rem;
+            background-color: #011b2e;
+            border-radius: 14px;
+        }
+
+        .sezione_input, .risultato{
+            width: 100%;
+            height: 6rem;
+            align-content: center;
+            text-align: center;
+        }
+
+        #inserimento_valori, #final{
+            font-family: "Open Sans", Arial, Helvetica, sans-serif;
+            padding: 0.8rem;
+            width: 85%;
+            border: 1px solid #01497c;
+            border-radius: 8px;
+            color: #012a4a;
+            font-size: 15pt;
+            font-weight: bold;
+        }
+
+        #inserimento_valori::placeholder{
+            font-weight: normal;
+        }
+
+        #inserimento_valori:focus{
+            outline: 2px solid #2a6f97;
+            outline-offset: -2px;
+            transition: 40ms;
+        }
+
+        .bottoni{
+            width: 100%;
+            height: 8rem;
+        }
+
+        #prima_riga, #funzioni{
+            position: relative;
+            width: 100%;
+            height: 3rem;
+            text-align: center;
+        }
+
+        #prima_riga{
+            margin-top: 1.5rem;
+        }
+
+        button{
+            font-family: "Open Sans", Arial, Helvetica, sans-serif;
+            font-size: 13pt;
+        }
+
+        #prima_riga button{
+            width: 15%;
+            padding: 0.6rem;
+            border: none;
+            border-radius: 4px;
+        }
+
+        #funzioni button{
+            width: 15%;
+            padding: 0.6rem;
+            border: none;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        .a{
+            margin-left: 0.5rem;
+        }
+
+        .b{
+            margin-left: 0.5rem;
+        }
+
+        #standard{
+            background-color: #023257;
+            color: rgb(255,255,255);
+        }
+
+        #fun{
+            background-color: #003b68;
+            color: rgb(255,255,255);
+        }
+
+        #equal{
+            background-color: #005b9b;
+            color: rgb(255,255,255);
+        }
+
+        #standard:hover{
+            cursor: pointer;
+            background-color: #012a4a;
+        }
+
+        #fun:hover{
+            cursor: pointer;
+            background-color: #00345b;
+        }
+
+        #equal:hover{
+            cursor: pointer;
+            background-color: #014980;
+        }
+
+        #final::placeholder{
+            font-weight: normal;
+        }
+
+        #final:focus{
+            cursor: default;
+            outline: none;
+        }
+    </style>
+
+    <script>
+        var risultato = 0;
+        var operazione = '';
+        var nuovoNumero = true;
+
+        function setOperazione(op) {
+            let dato = parseFloat(document.getElementById("inserimento_valori").value);
+            if (isNaN(dato)) {
+                alert("Attenzione, inserisci prima i numeri, poi esegui le operazioni.");
+                return;
+            }
+
+            if (nuovoNumero) {
+                risultato = dato; // Se è un nuovo numero, lo assegniamo a risultato
+                nuovoNumero = false; // Non è più un nuovo numero
+            } else {
+                calcolaRisultato(); // Calcola il risultato se c'è già un numero
+                risultato = parseFloat(document.getElementById('final').value); // Ottieni il risultato corrente
+            }
+            operazione = op; // Imposta l'operazione
+            document.getElementById("inserimento_valori").value = ''; // Pulisci il campo di input
+        }
+
+        function calcolaRisultato() {
+        let dato = parseFloat(document.getElementById("inserimento_valori").value);
+        if (isNaN(dato)) {
+            alert("Inserisci solo numeri");
+            return;
+        }
+
+        switch (operazione) {
+            case 'somma':
+                risultato += dato;
+                break;
+            case 'differenza':
+                risultato -= dato;
+                break;
+            case 'moltiplicazione':
+                risultato *= dato;
+                break;
+            case 'divisione':
+                if (dato === 0) {
+                    alert("Errore: Divisione per zero.");
+                    return;
+                }
+                risultato /= dato;
+                break;
+            case 'percentuale':
+                risultato = risultato * (dato / 100); // Percentuale
+                break;
+            case '√':
+                risultato = Math.sqrt(dato); // Radice quadrata
+                break;
+            case 'x²':
+                risultato = Math.pow(dato, 2); // Potenza di due
+                break;
+            case 'sin':
+                risultato = Math.sin(dato * (Math.PI / 180)); // Seno
+                break;
+            case 'cos':
+                risultato = Math.cos(dato * (Math.PI / 180)); // Coseno
+                break;
+            default:
+                return; // Nessuna operazione da eseguire
+        }
+
+        document.getElementById('final').value = risultato; // Mostra il risultato finale
+        nuovoNumero = true; // Permetti di inserire un nuovo numero
+        document.getElementById("inserimento_valori").value = ''; // Pulisci il campo di input
+    }
+
+    function funzioni (valore){
+        let dato = parseFloat(document.getElementById("inserimento_valori").value);
+        if (isNaN(dato)) {
+            alert("Inserisci solo numeri");
+            return;
+        }
+
+        switch(valore){
+            case 'percentuale':
+                risultato= dato/100;
+                break;
+
+            case 'radice':
+                risultato= Math.sqrt(dato);
+                break;
+
+            case 'potenza':
+                risultato= Math.pow(dato,2);
+                break;
+            case 'sin':
+                risultato= Math.sin(dato*(Math.PI/180));
+                break;
+
+            case 'cos':
+                risultato= Math.cos(dato*(Math.PI/180));
+                break;
+        }
+
+        document.getElementById('final').value= risultato;
+        document.getElementById("inserimento_valori").value='';
+        nuovoNumero= true;
+
+
+    }
+
+   
+    </script>
+
+</body>
+</html>
