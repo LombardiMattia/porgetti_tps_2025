@@ -240,21 +240,6 @@
                 }
                 risultato /= dato;
                 break;
-            case 'percentuale':
-                risultato = risultato * (dato / 100); // Percentuale
-                break;
-            case '√':
-                risultato = Math.sqrt(dato); // Radice quadrata
-                break;
-            case 'x²':
-                risultato = Math.pow(dato, 2); // Potenza di due
-                break;
-            case 'sin':
-                risultato = Math.sin(dato * (Math.PI / 180)); // Seno
-                break;
-            case 'cos':
-                risultato = Math.cos(dato * (Math.PI / 180)); // Coseno
-                break;
             default:
                 return; // Nessuna operazione da eseguire
         }
