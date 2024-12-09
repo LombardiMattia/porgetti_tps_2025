@@ -1,0 +1,87 @@
+/*import del font*/
+    @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+/*settings generici*/
+    body{
+        margin: auto;
+        background-color: #1A1B25;
+        color: rgb(255,255,255);
+        overflow: scroll;
+    }
+    *{
+        font-family: "Roboto", Arial, Helvetica, sans-serif;
+        font-size: 11pt;
+    }
+
+/*modifica sezione superiore*/
+    .superiore{
+        width: 100%;
+        padding: 0.6rem;
+        text-align: center;
+        border-bottom: 1px solid rgb(59, 58, 58);
+    }
+    .superiore h1{
+        font-size: 16pt;
+    }
+
+/*sezione inserimento*/
+    .sezione_inserimento{
+        width: 100%;
+        padding: 0.5rem;
+        height: 10rem;
+        margin-top: 1rem;
+        text-align: center;
+        border-bottom: 1px solid rgb(59, 58, 58);
+    }
+    .sezione_inserimento h1{
+        font-size: 14pt;
+    }
+    .sezione_inserimento p{
+        font-size: 11pt;
+        font-style: italic;
+        position: relative;
+        top: -0.5rem;
+    }
+
+    form input{
+        background-color: #2f3041;
+        padding: 0.5rem;
+        font-size: 10pt;
+        border-radius: 9px;
+    }
+    input[type="file"]::-webkit-file-upload-button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+/*spazio tabella*/
+    #spazio_tabella{
+        width: 100%;
+        padding: 0.5rem;
+        text-align: center;
+    }
+    #spazio_tabella h1{
+        font-size: 14pt;
+    }
+
+    table{
+        margin: auto;
+        border-collapse: collapse;
+    }
+    table td, tr{
+        border: 1px solid rgb(59, 58, 58);
+        width: 30%;
+        padding: 0.8rem;
+    }
+
+    /*rendo grassetto la prima riga*/
+    #tabella tr:nth-child(1) td{
+        font-weight: bold;
+        background-color: #2f3041;
+    }
