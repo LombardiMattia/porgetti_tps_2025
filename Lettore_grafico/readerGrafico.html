@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--FONT DI RIFERIMENTO: "RUBIK"-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <!--FOGLI DI STILE-->
+    <link rel="stylesheet" href="styleReaderGrafico.css">
+
+    <!--IMPORT API CHART.JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>Reader con Grafico</title>
+</head>
+<body>
+    <div class="superiore">
+        <h1>Lettore file CSV</h1>
+    </div>
+
+   <div class="sezione_inserimento">
+    <h1>Campo inserimento</h1>
+    <p>Scegli il tuo file di tipo CSV e genera automaticamente la tabella ed il proprio grafico.</p>
+
+    <form action="form">
+        <input type="file" id="file" name="Seleziona File" onchange="apri(this)">
+    </form>
+   </div>
+
+   <div id="spazio_tabella">
+    <h1>Tabella Generativa</h1>
+        <table id="tabella">
+            <tbody>
+
+            </tbody>
+        </table>
+   </div>
+
+   <div class="spazio_grafico">
+        <h1>Grafico Generativo</h1>
+        <canvas id="gestione_canva"></canvas>
+   </div>
+    
+   <script src="scriptGrafico.js"></script>
+</body>
+</html>

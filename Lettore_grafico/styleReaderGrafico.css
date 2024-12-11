@@ -1,0 +1,109 @@
+/*import del titolo*/
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+    /*settings generici*/
+    body{
+        margin: auto;
+        background-color: #242423;
+        color: rgb(255,255,255);
+        overflow: scroll;
+    }
+    *{
+        font-family: "Rubik", Arial, Helvetica, sans-serif;
+        font-size: 11pt;
+    }
+
+/*modifica sezione superiore*/
+    .superiore{
+        width: 100%;
+        padding: 0.6rem;
+        text-align: center;
+        border-bottom: 1px solid #333533;
+    }
+    .superiore h1{
+        font-size: 16pt;
+    }
+
+/*sezione inserimento*/
+    .sezione_inserimento{
+        width: 100%;
+        padding: 0.5rem;
+        height: 10rem;
+        margin-top: 1rem;
+        text-align: center;
+        border-bottom: 1px solid #333533;
+    }
+    .sezione_inserimento h1{
+        font-size: 14pt;
+    }
+    .sezione_inserimento p{
+        font-size: 11pt;
+        font-style: italic;
+        position: relative;
+        top: -0.5rem;
+    }
+
+    form input{
+        background-color: #2f3041;
+        padding: 0.5rem;
+
+        font-size: 10pt;
+        border-radius: 9px;
+    }
+    input[type="file"]::-webkit-file-upload-button {
+        background-color: #333533;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+/*spazio tabella*/
+    #spazio_tabella{
+        width: 100%;
+        padding: 0.5rem;
+        text-align: center;
+        border-bottom: 1px solid #333533;
+        margin-bottom: 3rem;
+    }
+    #spazio_tabella h1{
+        font-size: 14pt;
+    }
+
+    table{
+        margin: auto;
+        border-collapse: collapse;
+    }
+    table td, tr{
+        border: 1px solid #333533;
+        width: 30%;
+        padding: 0.8rem;
+    }
+
+    /*rendo grassetto la prima riga*/
+    #tabella tr:nth-child(1) td{
+        font-weight: bold;
+        background-color: #2f3041;
+    }
+
+/*spazio grafico*/
+.spazio_grafico{
+    width: 100%;
+    padding: 0.5rem;
+    text-align: center;
+    margin-top: -2rem;
+}
+.spazio_grafico h1{
+    font-size: 14pt;
+}
+
+#gestione_canva{
+    width: 100%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgb(255,255,255);
+}
